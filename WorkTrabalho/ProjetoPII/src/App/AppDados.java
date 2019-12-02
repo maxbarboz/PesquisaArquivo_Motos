@@ -24,25 +24,40 @@ public class AppDados {
 		}
 
 		int opcao = Menu.menu();
-		
+
 		int [] teste = new int[tamanhoArquivo];
 
 		switch (opcao) {
 		case 1:
-			Motos.testeMaiorCC(moto);
 			//Apresentar as motos com maior CC
+			Motos.testeMaiorCC(moto);
 			break;
 		case 2:
-			Motos.testeMaiorOdometria(moto);
 			//Ordenar as motos de acordo com a odometria
+			Motos.testeMaiorOdometria(moto);
 			break;
 		case 3:
+			Motos.testeQuantidadeCor(moto);
 			//Contabilizar a quantidade de motos de acordo com a cor
 			break;
 		case 4:
 			//Calcular o melhor custo benefício para aquisição
+			Motos.testeCustoBeneficio(moto);
 			break;
 		case 5:
+			//Pesquisa por preço máximo e mínimo
+			opcao= Menu.subMenu();
+			switch(opcao) {
+			case 1:
+				Motos.toStringMaior(Motos.testeMaiorMenor(moto));
+				break;
+			case 2:
+				Motos.toStringMenor(Motos.testeMaiorMenor(moto));
+				break;
+			case 0:
+				JOptionPane.showMessageDialog(null , "Programa finalizado pelo usuário");
+				break;
+			}
 			//Pesquisa por preço máximo e mínimo
 			break;
 		case 0:

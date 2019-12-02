@@ -11,12 +11,13 @@ public class DadosMotos {
 	int totalLinhasParaLeitura;
 
 	//-- dados das motos
-	String[] motoCodigo;
-	String[] motoNome;
-	double[] motoOdometria;
-	int[] motoCC;
-	String[] motoCor;
-	String [] codNaoSei; // código que eu nem sei oque é
+	private String[] motoCodigo;
+	private String[] motoNome;
+	private double[] motoOdometria;
+	private int[] motoCC;
+	private String[] motoCor;
+	private Double [] motoValor;
+	private Double [] custoBeneficio;
 
 	public DadosMotos(String arquivo, int linhas) {
 		this.nomeArquivo = arquivo;
@@ -43,20 +44,22 @@ public class DadosMotos {
 		motoOdometria  = new double[this.totalLinhasParaLeitura];
 		motoCC  = new int[this.totalLinhasParaLeitura];
 		motoCor = new String[this.totalLinhasParaLeitura];
-		codNaoSei = new String [this.totalLinhasParaLeitura];
+		motoValor = new Double [this.totalLinhasParaLeitura];
+		custoBeneficio = new Double [this.totalLinhasParaLeitura];
 
 		for(int k=0; k<totalLinhasParaLeitura; k++) {
 			//System.out.println(k + "\t" + arquivo.pegaLinha());
 			String linha = arquivo.pegaLinha();
 			String[] info = linha.split(";");
 
-			//-- quebra a linha com o sperador ";"
+			//-- quebra a linha com o separador ";"
 			motoCodigo[k] = info[0];
 			motoNome[k] = info[1];
 			motoOdometria[k] = Double.parseDouble(info[2]);
 			motoCC[k] = (int) Double.parseDouble(info[3]);
-			codNaoSei[k]= info[4]; // código que eu nem sei oque é
+			motoValor[k]= Double.parseDouble(info[4]); 
 			motoCor[k] = info[5];
+			custoBeneficio[k] = null;
 		}				
 	}
 
@@ -81,5 +84,23 @@ public class DadosMotos {
 	public String getMotoCor(int i) {
 		return motoCor[i];
 	} 
+
+	public Double getMotoValor(int i) {
+		return motoValor[i];
+	}
+
+	// custo beneficio
+
+	public Double getMotoCustoBeneficio(int i) {
+		// o cálculo do custo beneficio se da por valor sobre odometria, vezes um coeficiente elevado a cilindrada
+		final Double coeficiente = 1.0087;
+		final int valorMinimo = 1;
+		double valor = getMotoValor(i);
+		double odometria = getMotoOdometria(i);
+		int cc = getMotoCC(i);
+
+		custoBeneficio[i] = (valor/(odometria+valorMinimo)) * (Math.pow(coeficiente, cc));
+		return custoBeneficio[i];
+	}
 
 }
