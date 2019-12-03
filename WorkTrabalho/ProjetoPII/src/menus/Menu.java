@@ -23,19 +23,19 @@ public class Menu {
 		}
 	}
 	
-	
 	public static int subMenu() {
+		int opc = 0;
 		try {
 			String menu = "Informe a opção que deseja referente a motos:"+
 					"\n\nDigite 1 para -> Pesquisa por preço máximo"+
 					"\nDigite 2 para -> Pesquisa por preço mínimo"+
 					"\n\nDigite 0 para -> Sair do programa ";
-			int opc = Integer.parseInt(JOptionPane.showInputDialog(null, menu));
+			opc = Integer.parseInt(JOptionPane.showInputDialog(null, menu));
 			return opc;
 
 		} catch (Exception e) {
 			JOptionPane.showMessageDialog(null , "Atenção: Digite valores númericos de 0 a 2 de acordo com as opções.\nObrigado!");
-			return subMenu(); // chama o menu se o erro for inserção de caracteres ou valor nulo
+			return opc = subMenu(); // chama o menu se o erro for inserção de caracteres ou valor nulo
 		// REVER 
 		}
 	}
