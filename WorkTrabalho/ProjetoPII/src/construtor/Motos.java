@@ -1,14 +1,9 @@
 package construtor;
 import javax.swing.JOptionPane;
-import javax.swing.JTextArea;
-import javax.swing.JScrollPane;
-import javax.swing.JPanel;
-import java.awt.BorderLayout;
 import java.lang.reflect.Array;
-
-import javax.swing.JFrame;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
+import menus.Scroll;
 
 import App.DadosMotos;
 
@@ -107,6 +102,7 @@ public class Motos {
 	}
 
 	public static void testeQuantidadeCor(Motos [] _moto) {
+		// testas as cores possíveis
 		boolean teste = false;
 		ArrayList<String> cores = new ArrayList();
 		cores.add(_moto[0].motoCor);
@@ -124,7 +120,6 @@ public class Motos {
 				adicionaCor(_moto[i].motoCor, cores);
 			}
 		}
-
 		quantidadeCor(cores, _moto);
 
 	}
@@ -147,7 +142,7 @@ public class Motos {
 		cores.add(cor);
 	}
 
-	public static Motos [] criaCopia(Motos vet[]) {
+	private static Motos [] criaCopia(Motos vet[]) {
 		Motos [] vetorOrdenado = null;
 		if(vet != null) {
 			vetorOrdenado = new Motos[vet.length];
@@ -165,9 +160,7 @@ public class Motos {
 		for (int i = 0; i< somaCores.length; i++) {
 			texto += cores.get(i) + " \t\t\t "+somaCores[i]+" uni\n";
 		}
-		JTextArea JtxArea = new JTextArea(texto);
-		JOptionPane.showMessageDialog(null, JtxArea);
-		// O JTextArea é uma área para textos que pode conter várias linhas e várias colunas
+		Scroll scroll = new Scroll(texto);
 	}
 
 	// to string para exibição do maior valor de motos
@@ -185,9 +178,7 @@ public class Motos {
 					motoOrdenado[i].motoCor+" \t|"+
 					df.format(motoOrdenado[i].custoBeneficio)+"\n";
 		}
-		JTextArea JtxArea = new JTextArea(texto);
-		JOptionPane.showMessageDialog(null, JtxArea);
-		// O JTextArea é uma área para textos que pode conter várias linhas e várias colunas
+		Scroll scroll = new Scroll(texto);	
 	}
 
 
@@ -206,9 +197,7 @@ public class Motos {
 					motoOrdenado[i].motoCor+" \t|"+
 					df.format(motoOrdenado[i].custoBeneficio)+"\n";;
 		}
-		JTextArea JtxArea = new JTextArea(texto);
-		JOptionPane.showMessageDialog(null, JtxArea);
-
+		Scroll scroll = new Scroll(texto);			
 	}
 
 	// método de identação ( quebra de string )
